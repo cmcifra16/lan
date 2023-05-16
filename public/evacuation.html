@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Evacuation</title>
+  <meta charset='utf-8' />
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+  <link rel="shortcut icon" href=" " type="image/png">
+  <!-- Firebase-->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-storage.js"></script>
+  <!-- GOOGLE FONT -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <!-- BOXICONS -->
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <!-- APP CSS -->
+  <link rel="stylesheet" href="./css/grid.css">
+  <link rel="stylesheet" href="./css/app.css">
+
+
+</head>
+
+<style>
+  
+ 
+  
+ 
+ 
+ 
+ 
+ 
+  #map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+
+  #form {
+    position: absolute;
+    top: 100px;
+    left: 320px;
+    width: 320px;
+    z-index: 1;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  #form input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+
+  #form button {
+    background-color: #0074D9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .success-box {
+    position: fixed;
+    top: 10px;
+    width: 250px;
+    height: 60px;
+    border-radius: 20px;
+    right: 0;
+    background-color: rgb(11, 0, 163);
+    opacity: 50%;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+    padding: 10px;
+  }
+</style>
+
+<body>
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <img src="./images/logo.png" alt="Comapny logo">
+      <div class="sidebar-close" id="sidebar-close">
+        <i class='bx bx-left-arrow-alt'></i>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-info">
+
+        <div class="sidebar-user-name">
+
+          Admin
+        </div>
+      </div>
+
+    </div>
+    <!-- SIDEBAR MENU -->
+    <ul class="sidebar-menu">
+      <li>
+        <a href="dashboard.html">
+          <i class='bx bx-home'></i>
+          <span>DASHBOARD</span>
+        </a>
+      </li>
+      <li>
+        <a href="evacuation.html" class="active">
+          <i class='bx bx-map'></i>
+          <span>MAP</span>
+        </a>
+      </li>
+
+
+
+      <li>
+        <a href="text.html">
+          <i class='bx bx-broadcast'></i>
+          <span>ANNOUNCEMENT</span>
+        </a>
+      </li>
+      <li>
+        <a href="hotline.html">
+          <i class='bx bx-phone-call'></i>
+          <span>HOTLINE</span>
+        </a>
+      </li>
+    </ul>
+    <div class="logout"><a href="#" onclick="logout()"> <i class='bx bx-log-out'> </i> logout</a></div>
+    <style>
+      .logout {
+        border-top: 1px solid black;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        color: white;
+        padding: 30px;
+        font-size: 20px;
+      }
+
+      .logout :hover {
+        color: black;
+      }
+      .edite{
+        padding: 10px;
+       color: #0074D9;
+       border-bottom: 1px solid #0074D9;
+      }
+    </style>
+    <!-- END SIDEBAR MENU -->
+  </div>
+  <div class="main">
+    <div class="main-header">
+      <div class="mobile-toggle" id="mobile-toggle">
+        <i class='bx bx-menu-alt-right'></i>
+      </div>
+      <div class="main-title">
+        Evacuation
+      </div>
+    </div>
+    <div id='map'></div>
+    
+      <div id='form'>
+        <form action="JavaScript:void(0)" onsubmit="uploadImage()">
+          <label>Latitude:</label><br>
+          <input type='text' id='latitude' readonly />
+          <br>
+          <label>Longitude:</label><br>
+          <input type='text' id='longitude' readonly />
+          <input type="text" placeholder="Title" id="Title">
+          <input type="text" placeholder="Description" id="Description">
+          <input type="file" id="file"><br>
+          <br>
+          <button type="submit">Add evacuation</button>
+          <br>
+          <a href="editevac.html" class="edite">Delete Evacuation</a>
+        </form>
+       
+      
+    </div>
+ 
+   
+  </div>
+  <script>
+
+
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoibGFudXphYXBwIiwiYSI6ImNsY3d2ZDRqejF4M3Qzdm5xeGlqMWxpdHAifQ.IVv-nVwZbolZgDLtAMNJgw';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [126.06101, 9.23422],
+      zoom: 15
+    });
+
+    var marker = new mapboxgl.Marker()
+      .setLngLat([0, 0])
+      .addTo(map);
+
+    map.on('click', function (e) {
+      var coordinates = e.lngLat;
+      document.getElementById('latitude').value = coordinates.lat;
+      document.getElementById('longitude').value = coordinates.lng;
+
+      // Update marker position
+      marker.setLngLat(coordinates);
+    }); var firebaseConfig = {
+      apiKey: "AIzaSyBHtkQEWY5esT86YEAZi2mcKV-C1MvEFr8",
+      authDomain: "lanuza-63387.firebaseapp.com",
+      databaseURL: "https://lanuza-63387-default-rtdb.firebaseio.com",
+      projectId: "lanuza-63387",
+      storageBucket: "lanuza-63387.appspot.com",
+      messagingSenderId: "40431539801",
+      appId: "1:40431539801:web:7db8cea08d1aedbbf48348",
+      measurementId: "G-Z31155PZK3"
+    };
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+    var db = firebase.firestore();
+// Retrieve location data from Firebase
+db.collection('locations').get().then(function(querySnapshot) {
+  querySnapshot.forEach(function(doc) {
+    var data = doc.data();
+    var marker = new mapboxgl.Marker()
+      .setLngLat([data.longitude, data.latitude])
+      .addTo(map);
+  });
+}); 
+
+  </script>
+  <script src="js/app.js"></script>
+  <script src="./js/bar.js"></script>
+</body>
+
+</html>

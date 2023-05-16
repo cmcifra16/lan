@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="size.css">
+    <script src="https://kit.fontawesome.com/a597e53134.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href=" " type="image/png">
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <!-- BOXICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- APP CSS -->
+    <link rel="stylesheet" href="../css/grid.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="user.css">
+    <script src="user.js"></script>
+</head>
+
+<body>
+
+
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <img src="./images/logo.png" alt="Comapny logo">
+            <div class="sidebar-close" id="sidebar-close">
+                <i class='bx bx-left-arrow-alt'></i>
+            </div>
+        </div>
+        <div class="sidebar-user">
+            <div class="sidebar-user-info">
+
+                <div class="sidebar-user-name">
+
+                    username
+                </div>
+            </div>
+
+        </div>
+        <!-- SIDEBAR MENU -->
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="evacuation.html">
+                    <i class='bx bx-map'></i>
+                    <span>Edit Profile</span>
+                </a>
+            </li>
+
+
+
+            <li>
+                <a href="text.html">
+                    <i class='bx bx-broadcast'></i>
+                    <span>Hotline Number</span>
+                </a>
+            </li>
+
+
+            <li class="logout">
+                <a href="#" onclick="logout()"> <i class='bx bx-log-out'> </i> logout</a>
+            </li>
+        </ul>
+
+
+    </div>
+    <style>
+        .logout {
+            border-top: 1px solid black;
+            position: absolute;
+            margin-top: 300px;
+
+            color: white;
+
+            font-size: 20px;
+        }
+
+        .logout :hover {
+            color: black;
+        }
+
+        @media only screen and (max-height:566px) {
+            .logout {
+                margin-top: 0px;
+            }
+        }
+
+        @media only screen and (max-height:787px) {
+            .logout {
+                margin-top: 50px;
+            }
+        }
+    </style>
+    <div class="main">
+        <div class="main-header">
+            <div class="mobile-toggle" id="mobile-toggle">
+                <i class='bx bx-menu-alt-right'></i>
+            </div>
+            <div class="main-title">
+                <a href="mainscreen.html"> LanuzAPP</a>
+
+            </div>
+        </div>
+        <div class="main_screen">
+            <div class="screen_one">
+                <div class="col-11 col-md-10 col-sm-10 first_screen">
+                    <div class="emer" style="text-align: center;">
+                        <h1>Edit Profile</h1>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+            <script src="../js/bar.js"></script>
+            <script src="../js/load.js"></script>
+            <script src="user.js"></script>
+        </div>
+</body>
+
+</html>

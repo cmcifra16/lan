@@ -1,0 +1,111 @@
+<head>
+  <title>Mapbox Example</title>
+  <meta charset='utf-8' />
+ 
+  <script
+    src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.js'></script>
+  <link rel='stylesheet'
+    href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.css'
+    type='text/css' />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css' rel='stylesheet' />
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+ 
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+
+</head>
+<style>
+  body {
+    font-size: 16px;
+  }
+ 
+ 
+ .directions-control{
+  display: none;
+ }
+ .mapboxgl-ctrl-bottom-right{
+  display: none;
+ }
+ .mapboxgl-ctrl-bottom-left{
+  display: none;
+ }
+ .mapboxgl-ctrl-bottom-right{
+  display: none;
+ } .mapboxgl-ctrl-top-right button{
+ width: 100px;
+ height: 100px;
+ display: block; 
+ background-color: rgb(252, 247, 247);
+ color: aliceblue;
+ }
+ 
+  #map {
+    border: 5px solid rgb(14, 9, 9);
+    border-radius: 5px;
+    
+    margin:100px auto;
+    overflow: hidden;
+    position: fixed; 
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }    
+</style>
+
+<body>
+
+  <div id='map'></div>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibGFudXphYXBwIiwiYSI6ImNsY3d2ZDRqejF4M3Qzdm5xeGlqMWxpdHAifQ.IVv-nVwZbolZgDLtAMNJgw';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [126.06101, 9.23422],
+      zoom:3
+    });
+    var firebaseConfig = {
+      apiKey: "AIzaSyBHtkQEWY5esT86YEAZi2mcKV-C1MvEFr8",
+      authDomain: "lanuza-63387.firebaseapp.com",
+      databaseURL: "https://lanuza-63387-default-rtdb.firebaseio.com",
+      projectId: "lanuza-63387",
+      storageBucket: "lanuza-63387.appspot.com",
+      messagingSenderId: "40431539801",
+      appId: "1:40431539801:web:7db8cea08d1aedbbf48348",
+      measurementId: "G-Z31155PZK3"
+    };
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+    db.collection("locations").get().then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        var location = doc.data();
+        var long =location.longitude;
+        var lat = location.latitude;
+        var marker = new mapboxgl.Marker()
+          .setLngLat([location.longitude, location.latitude])
+          .setPopup(new mapboxgl.Popup().setHTML("<h3>" + location.title + "</h3><p>" + location.description + "</p><img width= 100  height= 100  src='" + location.photoUrl + "' alt='Location Photo'>"))
+          .addTo(map)
+          .togglePopup();
+      });
+    });
+   
+    var start = [126.06101, 9.23422];
+    var end = [126.05978, 9.23286];
+    var directions = new MapboxDirections({
+      accessToken: mapboxgl.accessToken,
+    });
+  
+    var popup = new mapboxgl.Popup({ closeButton: false })
+      .setLngLat([0, 0]).addTo(map);
+    map.addControl(directions, 'top-left');
+    directions.setOrigin(start);
+    directions.setDestination(end);
+    map.addControl(new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    }));
+    
+  </script>

@@ -1,0 +1,20 @@
+/* styles for web view */
+.main-container {
+   display: flex;
+}
+
+.login-container {
+   margin-left: auto;
+}
+
+/* styles for mobile view */
+@media (max-width: 567px) {
+   .main-container {
+       flex-direction: column;
+       align-items: center;
+   }
+
+   .login-container {
+       margin: 0;
+   }
+}

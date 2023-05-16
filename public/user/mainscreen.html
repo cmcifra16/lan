@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="size.css">
+    <script src="https://kit.fontawesome.com/a597e53134.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href=" " type="image/png">
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-storage.js"></script>
+    <!-- GOOGLE FONT -->
+
+    <!-- BOXICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@twilio/sdk@3.0.0-alpha.42/dist/browser.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- APP CSS -->
+    <link rel="stylesheet" href="../css/grid.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="user.css">
+    <script src="user.js"></script>
+</head>
+
+<body>
+
+
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+
+            <div class="sidebar-close" id="sidebar-close">
+                <i class='bx bx-left-arrow-alt'></i>
+            </div>
+        </div>
+        <div class="userinfo" id="userinfo">
+            <img src="" alt="" id="uprofile" class="uprofile"
+                style="width: 150px; height: 150px; border-radius: 50%; align-items: center;text-align: center;">
+            <div id="uname" class="uname"></div>
+
+
+        </div>
+
+
+
+        <!-- SIDEBAR MENU -->
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="#" class="col-4 btns" id="modal-btn-4">
+                    <i class='bx bx-user'></i>
+                    <span>Edit Profile</span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#" class="col-5 btns" id="modal-btn-5">
+                    <i class='bx bx-phone-call'></i>
+                    <span>Hotline Number</span>
+                </a>
+            </li>
+            <div id="modal-5" class="modal">
+                <div class="modal-content" id="con">
+
+                    <div class="update_head">
+                        <a href="mainscreen.html"><img src="../images/down.png" alt="" class="dawn" srcset=""></a>
+                        <h1>Update Profile</h1>
+                        <form action=" "></form>
+                        <img src="" alt="" id="editprof" class="editprof"
+                            style="width: 100px; height: 100px; border-radius: 50%; align-items: center;text-align: center;">
+                        <form action="JavaScript:void(0)" onsubmit="imageupdate()">
+                            <input type="file" id="file" placeholder="" class="file"><br>
+
+                            <input type="text" id="useruid2" hidden> <button type="submit" class="upurl">update
+                                profile</button>
+                        </form>
+                    </div>
+                    <form action="JavaScript:void(0)" onsubmit="updateProfile()" class="profile_edit">
+
+
+
+                        <div class="form-group">
+                            <input type="text" id="username" name="username" required placeholder="Full Name">
+                        </div>
+                        <div class="form-group" hidden>
+                            <input type="text" id="userid" name="userid" required hidden>
+                        </div>
+                        <div class="form-group">
+
+                            <select id="gender" name="gender" required>
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+
+                            <input type="tel" id="mobile" name="mobile" pattern="09[0-9]{9}" required
+                                placeholder="Mobile Number">
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+
+                                <input type="address" id="address" name="address" required placeholder="Address">
+                            </div>
+
+                        </div>
+
+                        <button type="submit">Update</button>
+
+                    </form>
+
+                </div>
+            </div>
+            <!-- Modal -->
+            <div id="modal-4" class="modal">
+                <div class="modal-content" id="con">
+
+
+                    <div class="hotline">
+                        <a href="mainscreen.html"><img src="../images/down.png" alt="" class="dawn" srcset=""></a>
+                        <div class="title_header">
+                            <h1> HOTLINE</h1>
+                        </div>
+                        <div class="userhotline" id="userhotline">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSS for modal -->
+
+
+
+
+
+            <li class="logout">
+                <a href="#" onclick="userlogout()"> <i class='bx bx-log-out'> </i> logout</a>
+            </li>
+        </ul>
+
+
+    </div>
+    <style>
+        .logout {
+            border-top: 1px solid black;
+            position: absolute;
+            margin-top: 300px;
+
+            color: white;
+
+            font-size: 20px;
+        }
+
+        .logout :hover {
+            color: black;
+        }
+
+        @media only screen and (max-height:566px) {
+            .logout {
+                margin-top: 0px;
+            }
+        }
+
+        @media only screen and (max-height:787px) {
+            .logout {
+                margin-top: 50px;
+            }
+        }
+    </style>
+    <div class="main">
+        <div class="main-header">
+            <div class="mobile-toggle" id="mobile-toggle">
+                <i class='bx bx-menu-alt-right'></i>
+            </div>
+            <div class="main-title">
+                <img src="../images/logo.png" alt="" class="logo1" srcset="">
+
+            </div>
+        </div>
+        <div class="main_screen">
+            <div class="screen_one">
+                <div class="col-11 col-md-10 col-sm-10 first_screen">
+                    <div class="emer" style="text-align: center;">
+                        <h1>Emergency Evacuation Needed?</h1>
+                        <p>One Press Button for Emergency Assistance</p>
+                        
+                            
+                            <button type="button" class="click" onclick="showSeniorModal()">&nbsp&nbsp&nbsp<img
+                                    src="../images/emer.png" alt=""></button>
+           
+
+                        <!-- Senior Citizen Modal -->
+                        <div class="modal" id="seniorModal">
+                            <div class="modal-content1">
+                                <div class="textm">
+                                <h2>Are you accompanied <br>with a senior citizen or PWD?</h2></div>
+                                <div class="btn-group">
+
+
+                                    <form action="JavaScript:void(0)" onsubmit="sendsms()">
+                                        <input type="text" id="useruid" name="useruid" hidden>
+                                        <input type="text" id="profile" name="profile" hidden>
+                                        <input type="text" id="unsame" name="unsame" hidden>
+                                        <input type="text" id="contact" name="contact" hidden>
+                                        <br>
+                                        <input type="radio" id="seniorYes" name="senior" value="yes">
+                                        <label for="seniorYes">Yes</label>
+                                        <input type="radio" id="seniorNo" name="senior" value="no" checked>
+                                        <label for="seniorNo">No</label>
+                                        
+                                       <br>
+                                       
+                                    <button type="submit">Submit</button>
+                                    </form>
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <script> function showSeniorModal() {
+                                const seniorModal = document.getElementById("seniorModal");
+                                seniorModal.style.display = "block";
+                            }
+
+                            function setSenior(value) {
+                                const seniorInput = document.getElementById("senior");
+                                seniorInput.value = value;
+                                const seniorModal = document.getElementById("seniorModal");
+                                seniorModal.style.display = "none";
+                            }</script>
+                       <style>
+                          input[type="radio"] {
+        margin-right: 10px;
+        display: none;
+    }
+    
+    /* Style the labels for the radio buttons */
+    label {
+        font-size: 18px;
+        padding: 5px 10px;
+        background-color: #e2e0e0;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        display: inline-block;
+        width: 100px;
+        
+        margin: 10px;
+    }
+    
+    /* Style the selected radio button label */
+    input[type="radio"]:checked + label {
+        background-color: #007bff;
+        color: #fff;
+      
+    }
+                        #seniorModal{
+                          width: 450px;
+                          height: 300px;
+                          position: fixed;
+                          top: 50%;
+                          left: 35%;
+                          transform: translate(-50%, -50%);
+                          align-items: center;
+                          text-align: center;
+                          justify-content: center;
+                          border-radius: 10px;
+                        }
+                        .modal-content1{
+                            border-radius: 10px;
+                          align-items: center;
+                          text-align: center;
+                          width: 450px;
+                          justify-content: center;
+                          height: 300px;
+                          color: black;
+                          background-color: white;
+                          padding: 50px;
+                         
+                          position: absolute;
+                        }
+                        .modal-content1 button{
+                            width: 120px;
+                            border-radius: 10px;
+                            height: 50px;
+                            margin-top: 40px;
+                            color: white;
+                             
+                            background-color:#000467;
+                        }
+                        @media  (max-width: 800px) {
+                            #seniorModal{
+                         
+                          top: 50%;
+                          left: 50%;
+                         
+                        }
+                        }
+                        
+                      </style>
+                      
+                        
+                        <div class="lyr2">
+                            <p>After Pressing the Alarm Button
+                                It will Automatically Notify The Rescuers</p>
+                            <h3>Know your Hazard</h3>
+                        </div>
+
+                    </div>
+                    <div class="div_btns">
+                        <div class="col-3 btns" id="modal-btn-1"><img src="../images/Tsunami.png" alt=""></div>
+                        <div class="col-3 btns" id="modal-btn-2"><img src="../images/Landslide.png" alt="" srcset="">
+                        </div>
+                        <div class="col-3 btns" id="modal-btn-3"><img src="../images/flood2.png" alt="" srcset=""></div>
+                    </div>
+                </div>
+
+                <!-- Modal 1 -->
+                <div id="modal-1" class="modal">
+                    <div class="modal-content">
+
+                        <div class="text_content">
+                            <a href="mainscreen.html"><img src="../images/down.png" alt="" class="dawn" srcset=""></a>
+                            <span>
+                                <h1>Storm Surge</h1>
+                            </span>
+                            <span>
+                                <p>A storm surge is a tsunami-like phenomenon
+                                    of rising water resulting from typhoons (storms).
+                                </p>
+                            </span>
+                            <span>
+                                <h3>How To Prepare For Storm Surges</h3>
+                            </span>
+                            <span>
+                                <p>Evacuate immediately and move to a more elevated area when there’s an alert for
+                                    strong typhoons.</p>
+                                <img src="../images/Running.png" alt="Running">
+                            </span>
+
+                            <span> <img src="../images/med.png" alt="">
+                                <p>Always have a survival kit ready and accessible. Ideally this is near your exit
+                                    doors, ready for grabbing when in a rush.</p>
+                            </span>
+                            <span>
+                                <p>Listen for emergency information and alerts. You will also recieved SMS notification
+                                    to from this app.</p>
+                                <img src="../images/device.png" alt="">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal 2 -->
+                <div id="modal-2" class="modal">
+                    <div class="modal-content">
+                        <div class="text_content">
+                            <a href="mainscreen.html"><img src="../images/down.png" alt="" class="dawn" srcset=""></a>
+                            <span>
+                                <h1>Land Slide</h1>
+                            </span>
+                            <span>
+                                <p>A landslide is a movement of earth, rock, or debris due to gravity. Landslides can be
+                                    caused by continuous heavy rainfall, strong earthquakes, or human activities.</p>
+                            </span>
+                            <span>
+                                <h3>How To Prepare For Land Slides</h3>
+                            </span>
+                            <span>
+                                <p>Evacuate immediately when there’s an alert for heavy rainfall or as advised by your
+                                    local
+                                    authorities.</p>
+                                <img src="../images/exit.png" alt="An image depicting heavy rainfall">
+                            </span>
+
+                            <span> <img src="../images/med.png" alt="">
+                                <p>Always have a survival kit ready and accessible. Ideally this is near your exit
+                                    doors,
+                                    ready for grabbing when in a rush.</p>
+                            </span>
+                            <span>
+                                <p>Listen for emergency information and alerts. You will also recieved SMS notification
+                                    to
+                                    from this app.</p>
+                                <img src="../images/device.png" alt="">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal 3 -->
+                <div id="modal-3" class="modal">
+                    <div class="modal-content">
+                        <div class="text_content">
+                            <a href="mainscreen.html"><img src="../images/down.png" alt="" class="dawn" srcset=""></a>
+                            <span>
+                                <h1>Flood</h1>
+                            </span>
+                            <span>
+                                <p>A landslide is a movement of earth, rock, or debris due to gravity. Landslides can be
+                                    caused by continuous heavy rainfall, strong earthquakes, or human activities.</p>
+                            </span>
+                            <span>
+                                <h3>How To Prepare For Land Slides</h3>
+                            </span>
+                            <span>
+                                <p>Be prepared to evacuate immediately when there’s an alert for heavy rainfall.
+                                </p>
+                                <img src="../images/Floods.png" alt="An image depicting heavy rainfall">
+                            </span>
+
+                            <span> <img src="../images/Boot.png" alt="">
+                                <p>Refrain from walking through floodwater most especially without wearing protective
+                                    gear like boots.</p>
+                            </span>
+                            <span>
+                                <p>Don’t walk or drive through moving water. It can sweep you and your car away.</p>
+                                <img src="../images/car.png" alt="">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="screen_two" style="display:none;">
+                <div class="announce" id="announce">
+
+                    <div class="title_header">
+                        <h1> ANNOUNCEMENT</h1>
+                    </div>
+                    <div class="postuser" id="postuser"></div>
+
+                </div>
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+
+                </div>
+            </div>
+
+            <div class="screen_three" style="display:none;">
+                <iframe src="https://datadta-a72cd.web.app/#/" frameborder="0" allow="geolocation"
+                    class="mapbox"></iframe>
+            </div>
+            <div class="screen_4" style="display:none;">
+
+                <iframe src="https://map-map-576f7.web.app/" frameborder="0" allow="geolocation"
+                    style="position: fixed; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%;"></iframe>
+            </div>
+        </div>
+
+        <div class="change_screen">
+            <span class="col-3 change_one">
+
+                <h2>Announcement</h2>
+                <img src="../images/commercial.png" alt="">
+
+            </span>
+
+
+            <span class="col-3 change_two">
+
+                <h2>Home</h2>
+                <img src="../images/home2.png" alt="">
+            </span>
+            <span class="col-3 change_three">
+
+                <h2>Map</h2>
+                <img src="../images/marker.png" alt="">
+            </span>
+            <span class="col-3 change_4">
+
+                <h2>Navigate</h2>
+                <img src="../images/marker3.png" alt="">
+            </span>
+        </div>
+
+
+        <script>
+            var screenOne = document.querySelector(".screen_one");
+            var screenTwo = document.querySelector(".screen_two");
+            var screenThree = document.querySelector(".screen_three");
+            var screen4 = document.querySelector(".screen_4");
+
+            var changeOne = document.querySelector(".change_one");
+            var changeTwo = document.querySelector(".change_two");
+            var changeThree = document.querySelector(".change_three");
+            var change4 = document.querySelector(".change_4");
+
+            changeOne.addEventListener("click", function () {
+                screenOne.style.display = "none";
+                screenTwo.style.display = "block";
+                screenThree.style.display = "none";
+                screen4.style.display = "none";
+            });
+
+            changeTwo.addEventListener("click", function () {
+                screenOne.style.display = "block";
+                screenTwo.style.display = "none";
+                screenThree.style.display = "none";
+                screen4.style.display = "none";
+            });
+
+            changeThree.addEventListener("click", function () {
+                screenOne.style.display = "none";
+                screenTwo.style.display = "none";
+                screen4.style.display = "none";
+                screenThree.style.display = "block";
+            });
+            change4.addEventListener("click", function () {
+                screenOne.style.display = "none";
+                screenTwo.style.display = "none";
+                screenThree.style.display = "none";
+                screen4.style.display = "block";
+            });
+        </script>
+
+
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-storage.js"></script>
+    <!-- GOOGLE FONT -->
+
+    <script src="../js/bar.js"></script>
+    <script src="../js/load.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="user.js"></script>
+    </div>
+</body>
+
+</html>

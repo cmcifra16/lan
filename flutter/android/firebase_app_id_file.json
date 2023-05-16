@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "40431539801",
+    "project_id": "lanuza-63387",
+    "storage_bucket": "lanuza-63387.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40431539801:android:647dcbbbed82307ef48348",
+        "android_client_info": {
+          "package_name": "com.example.lanuza_resident"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40431539801-bpt40bq719nbc807p45mrcdo487ne3vh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5w3S4MC7tMM449c1zIldyzqKv7MCkjFQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40431539801-bpt40bq719nbc807p45mrcdo487ne3vh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "40431539801-0mcvk07loq79ita2khphas5vuunerrqa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.lanuzaResident"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

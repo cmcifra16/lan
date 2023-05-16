@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        LanuzAPP admin
+    </title>
+    <link rel="shortcut icon" href=" " type="image/png">
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <!-- BOXICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- APP CSS -->
+    <link rel="stylesheet" href="./css/grid.css">
+    <link rel="stylesheet" href="./css/app.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <img src="./images/logo.png" alt="Comapny logo">
+            <div class="sidebar-close" id="sidebar-close">
+                <i class='bx bx-left-arrow-alt'></i>
+            </div>
+        </div>
+        <div class="sidebar-user">
+            <div class="sidebar-user-info">
+
+                <div class="sidebar-user-name">
+
+                    Admin
+                </div>
+            </div>
+
+        </div>
+        <!-- SIDEBAR MENU -->
+        <ul class="sidebar-menu">
+            <li>
+                <a href="dashboard.html" class="active">
+                    <i class='bx bx-home'></i>
+                    <span>DASHBOARD</span>
+                </a>
+            </li>
+            <li>
+                <a href="evacuation.html">
+                    <i class='bx bx-map'></i>
+                    <span>MAP</span>
+                </a>
+            </li>
+
+
+
+            <li>
+                <a href="text.html">
+                    <i class='bx bx-broadcast'></i>
+                    <span>ANNOUNCEMENT</span>
+                </a>
+            </li>
+            <li>
+                <a href="hotline.html">
+                    <i class='bx bx-phone-call'></i>
+                    <span>HOTLINE</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="logout"><a href="#" onclick="logout()"> <i class='bx bx-log-out'> </i> logout</a></div>
+        <style>
+            .logout {
+                border-top: 1px solid black;
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                color: white;
+                padding: 30px;
+                font-size: 20px;
+            }
+
+            .logout :hover {
+                color: black;
+            }
+        </style>
+        <!-- END SIDEBAR MENU -->
+    </div>
+    <!-- END SIDEBAR -->
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+        <div class="main-header">
+            <div class="mobile-toggle" id="mobile-toggle">
+                <i class='bx bx-menu-alt-right'></i>
+            </div>
+            <div class="main-title">
+                dashboard
+            </div>
+        </div>
+        <style>
+            #c1 {
+                background-color: #000467;
+                background: linear-gradient(to right, #0003678a, #000467);
+                color: white;
+            }
+            #c2 {
+                background: linear-gradient(to right, #ff0505, #530000);
+                color: white;
+            }
+            #c3 {/* Set a linear gradient background */
+background: linear-gradient(to right, #05ff44, #00d9ff);
+
+                ;
+                color: white;
+            }
+        </style>
+        <div class="main-content">
+    
+            <div class="row"  id="content-main">
+                <div class="col-3 col-md-6 col-sm-12" onclick="showTable('table1')">
+                    <div class="box box-hover" id="c1">
+
+                        <div class="counter"  >
+                            <div class="counter-title">
+                                Total User
+                            </div>
+                            <div class="counter-info">
+                                <div class="counter-count" id="counter-count">
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-3 col-md-6 col-sm-12" onclick="showTable('table2')">
+                    <div class="box box-hover" id="c2">
+                      <div class="counter">
+                        <div class="counter-title">
+                          Total evacuation request
+                        </div>
+                        <div class="counter-info">
+                          <div class="counter-count2" id="counter-count2"></div>
+                                 </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                <div class="col-3 col-md-6 col-sm-12" onclick="showTable('table3')">
+
+                    <div class="box box-hover" id="c3">
+
+                        <div class="counter" id="c3">
+                            <div class="counter-title">
+                                total rescued
+                            </div>
+                            <div class="counter-info">
+                                <div class="counter-count3" id="counter-count3">
+
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <style>
+                .statusCell{
+                    color:   red;
+                    font-weight: bolder;
+
+                }
+                .doneCell{
+                    color:   rgb(38, 0, 255);
+                    font-weight: bolder;
+                }
+                .table {
+                    display: none;
+                }
+
+                .table.active {
+                    display: block;
+
+                }
+                #table1 img,#table2 img,#table3 img{
+width: 100px;
+height: 100px;
+                }
+                .table{
+                    background-color: rgb(221, 221, 221);
+                    padding: 40px;
+                    border-radius: 20px;
+                }
+             #div1 button{
+                width: 300px;
+                height: 50px;
+                border-radius: 10px;
+                background-color: #000467;
+                color: white;
+                right: 0;
+           margin-bottom: 20px;
+                
+             }
+            </style>
+            <div class="col-12" id="div1">
+                <div class="table" id="table1"><button onclick="downloadTable('table-data1')">Get Report</button>
+                 
+                    <div class="box-header"> Users</div>
+                    <div class="box-body overflow-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Profile</th>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Address</th>
+                                    <th>Contact</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-data1"></tbody>
+                        </table>
+                         
+                    </div>
+                </div>
+                
+                <div class="table" id="table2">
+                    <button onclick="downloadTable('table-data2')">Get Report</button>
+                 
+                    <div class="box-header">rescued</div>
+                    <div class="box-body overflow-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Profile</th>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+                                    <th>Coordinates</th>
+                                    <th>Coordinates</th>
+                                    <th>with senior</th>
+                                    <th>status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-data2"></tbody>
+                        </table>
+                           </div>
+                </div>
+                
+                <div class="table" id="table3">
+                    <button onclick="downloadTable('table-data3')">Get Report</button>
+                 
+                    <div class="box-header">rescued</div>
+                    <div class="box-body overflow-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Profile</th>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+                                    <th>Coordinates</th>
+                                    <th>Coordinates</th>
+                                    <th>with senior</th>
+                                    <th>status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-data3"></tbody>
+                        </table>
+                           </div>
+                </div>
+                
+                <script>
+                    function downloadTable(tableID) {
+                        const filename = 'table.csv';
+                        const table = document.getElementById(tableID);
+                        const rows = table.querySelectorAll('tr');
+                
+                        // Convert rows to comma-separated values
+                        let csv = '';
+                        for (let i = 0; i < rows.length; i++) {
+                            const cells = rows[i].querySelectorAll('td, th');
+                            let row = '';
+                            for (let j = 0; j < cells.length; j++) {
+                                const cell = cells[j].textContent.replace(/(\r\n|\n|\r)/gm, '');
+                                row += cell + ',';
+                            }
+                            csv += row.slice(0, -1) + '\r\n';
+                        }
+                
+                        // Create download link and click it
+                        const link = document.createElement('a');
+                        link.style.display = 'none';
+                        link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv));
+                        link.setAttribute('download', filename);
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                
+                    function showTable(id) {
+                        // Hide all table elements
+                        let tables = document.querySelectorAll('.table');
+                        for (let i = 0; i < tables.length; i++) {
+                            tables[i].classList.remove('active');
+                        }
+
+                        // Show the selected table element
+                        document.getElementById(id).classList.add('active');
+                    }
+                </script>
+            </div>
+
+
+
+        </div>
+    </div>
+    </div>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+    <script src="./js/bar.js"></script>
+    <script src="./js/load.js"></script>
+    <script src="./js/app.js"></script>
+    <script>
+        function showDiv(id) {
+            // Hide all div elements
+            let divs = document.querySelectorAll('div');
+            for (let i = 0; i < divs.length; i++) {
+                divs[i].classList.remove('active');
+            }
+
+            // Show the selected div element
+            document.getElementById(id).classList.add('active');
+        }
+    </script>
+    
+</body>
+
+</html>

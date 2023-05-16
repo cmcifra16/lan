@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanuza</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+   
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="title-container">
+
+            <h1>Welcome <br> to <br> Lanuza Preparedness <br> and<br> Disaster Risk Reduction APP</h1>
+        </div>
+        <div class="login-container">
+            <div class="LogTitle">
+                <h1>LanuzaAPP</h1>
+
+                <h1>Signup</h1>
+            </div>
+
+
+
+            <form action="JavaScript:void(0)" onsubmit="signup()">
+                 
+                <input type="text" id="username" name="username" required placeholder="  Full Name">
+
+                
+                
+                <select id="gender" name="gender" required>
+                    <option value="">Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+               
+                <input type="tel" id="mobile" name="mobile" pattern="09[0-9]{9}" required placeholder="  Mobile Number">
+
+                
+                <input type="address" id="address" name="address" required placeholder="  Address">
+ 
+                <input type="email" id="email" name="email" required placeholder="  Email">
+
+                
+                <input type="password" id="password" name="password" required placeholder="  Password">
+                <input type="password" id="password2" name="password" required placeholder=" Re-type Password">
+
+                <button type="submit">Sign up</button>
+                <p>Have an Account?<a href="index.html"> Login</a></p>
+            </form>
+
+
+
+
+        </div>
+<script src="js/app.js"></script>
+<script src="./js/app.js"></script>
+</body>
+
+</html>

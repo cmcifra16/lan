@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Twilio SMS Example</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script src="https://sdk.twilio.com/js/client/v1.12/twilio.js"></script>
+    
+</head>
+<body>
+	<form>
+		<label for="phone_number">Phone Number:</label>
+		<input type="text" id="phone_number" name="phone_number">
+		<br>
+		<label for="message">Message:</label>
+		<textarea id="message" name="message"></textarea>
+		<br>
+		<button type="button" onclick="sendSMS()">Send SMS</button>
+	</form>
+
+	<script>
+		// Your Twilio account SID and auth token
+        const accountSid = "ACe44a6647232d8546914e56818cb93809";
+		const authToken = "7dafd98fefebbb4699c7414f9fe6cece";
+
+// Create a new Twilio client object
+const client = new Twilio(accountSid, authToken);
+
+// Function to send an SMS message
+function sendSMS() {
+    const phoneNumber = $('#phone_number').val();
+    const message = $('#message').val();
+
+    // Use the Twilio client to send the SMS message
+    client.messages.create({
+        body: message,
+        from: '+18634319648',
+        to: phoneNumber
+    }).then(function(message) {
+        // Show a success message
+        Swal.fire({
+            title: 'SMS Sent',
+            text: 'Your message has been sent successfully!',
+            icon: 'success'
+        });
+    }).catch(function(error) {
+        // Show an error message
+        Swal.fire({
+            title: 'Error',
+            text: 'There was an error sending your message. Please try again later.',
+            icon: 'error'
+        });
+        console.error('Twilio error:', error);
+    });
+}
+
+	</script>
+</body>
+</html>

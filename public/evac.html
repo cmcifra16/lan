@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Evacuation</title>
+  <meta charset='utf-8' />
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+</head>
+
+<style>
+  #map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #form {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 320px;
+    z-index: 1;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  #form input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+
+  #form button {
+    background-color: #0074D9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+</style>
+
+<body>
+  <div id='map'></div>
+  <div id='form'>
+    <form>
+      <label>Latitude:</label><br>
+      <input type='text' id='latitude' readonly />
+      <br>
+      <label>Longitude:</label><br>
+      <input type='text' id='longitude' readonly />
+      <input type="text" placeholder="Title">
+      <input type="text" placeholder="Description">
+      <input type="file"><br>
+      <br>
+      <button type='button' id='getCoords'>Add evacuation</button>
+    </form>
+  </div>
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibGFudXphYXBwIiwiYSI6ImNsY3d2ZDRqejF4M3Qzdm5xeGlqMWxpdHAifQ.IVv-nVwZbolZgDLtAMNJgw';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [126.06101, 9.23422],
+      zoom: 15
+    });
+
+    map.on('click', function(e) {
+      var coordinates = e.lngLat;
+      document.getElementById('latitude').value = coordinates.lat;
+      document.getElementById('longitude').value = coordinates.lng;
+    });
+  </script>
+</body>
+
+</html>

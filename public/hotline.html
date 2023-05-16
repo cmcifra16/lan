@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Evacuation</title>
+  <meta charset='utf-8' />
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+  <link rel="shortcut icon" href=" " type="image/png">
+
+  <!--twilio-->
+
+  <!--Firebase-->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-storage.js"></script>
+  <!-- GOOGLE FONT -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <!-- BOXICONS -->
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <!-- APP CSS -->
+  <link rel="stylesheet" href="./css/grid.css">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <img src="./images/logo.png" alt="Comapny logo">
+      <div class="sidebar-close" id="sidebar-close">
+        <i class='bx bx-left-arrow-alt'></i>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-info">
+
+        <div class="sidebar-user-name">
+
+          Admin
+        </div>
+      </div>
+
+    </div>
+    <!-- SIDEBAR MENU -->
+    <ul class="sidebar-menu">
+      <li>
+        <a href="dashboard.html">
+          <i class='bx bx-home'></i>
+          <span>DASHBOARD</span>
+        </a>
+      </li>
+      <li>
+        <a href="evacuation.html">
+          <i class='bx bx-map'></i>
+          <span>MAP</span>
+        </a>
+      </li>
+
+
+
+      <li>
+        <a href="text.html">
+          <i class='bx bx-broadcast'></i>
+          <span>ANNOUNCEMENT</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="hotline.html" class="active">
+          <i class='bx bx-phone-call'></i>
+          <span>HOTLINE</span>
+        </a>
+      </li>
+
+    </ul>
+    <div class="logout"><a href="#" onclick="logout()"> <i class='bx bx-log-out'> </i> logout</a></div>
+    <style>
+      .logout{
+        border-top: 1px solid black;
+        position: fixed;
+        left: 0;
+        bottom: 0; 
+        color: white;
+        padding: 30px;
+        font-size: 20px;
+      }
+      .logout :hover{
+        color: black;
+      }
+    </style>
+    <!-- END SIDEBAR MENU -->
+  </div>
+  <div class="main">
+    <div class="main-header">
+      <div class="mobile-toggle" id="mobile-toggle">
+        <i class='bx bx-menu-alt-right'></i>
+      </div>
+      <div class="main-title">
+     Hotline
+      </div>
+    </div>
+    <div class="column">
+      <div class="addhotline">
+        <div class="title_header">
+          <h1> ADD HOTLINE NUMBER</h1>
+        </div>
+        <form action="JavaScript:void(0)" onsubmit="uploadhotline2()">
+          <input type="text" id="title" placeholder=" Title">
+          <input type="text" name="" id="number" placeholder="Hotline number">
+          <label for="">choose a logo</label>
+          <input type="file" id="file" class="file">
+          <button type="submit">
+            <p>ADD</p>
+          </button>
+        </form>
+      </div>
+
+      <div class="hotline">
+        <div class="title_header">
+          <h1> HOTLINE</h1>
+        </div>
+        <div class="hotlinedata" id="hotlinedata">
+
+ 
+
+
+        </div> 
+      </div>
+
+    </div>
+
+
+    <style>
+      img{
+        border-radius: 50%;
+      }
+      .hotlinedata button{
+width: 100px;
+height: 50px;
+border-radius: 10px;
+      }
+     
+     .hotlinedata div {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 30px; 
+ 
+}
+.hotlinedata img{
+  width: 100px;
+  height: 100px;
+}
+      .column {
+        display: inline-flex;
+
+      }
+
+      .title_header {
+        background-color: #000467;
+        color: aliceblue;
+        height: 100px;
+        padding: 20px;
+        border-radius: 20px 20px 0 0;
+        align-items: center;
+        text-align: center;
+      }
+
+      .addhotline form {
+        padding: 20px;
+
+      }
+
+      .addhotline input {
+        width: 600px;
+        height: 50px;
+        display: flex;
+        margin: 20px;
+        border-radius: 10px;
+      }
+
+      button,
+      p {
+        color: white;
+        background-color: #000467;
+      }
+
+      .addhotline button,
+      label {
+        width: 300px;
+        height: 50px;
+
+        color: black;
+        border-radius: 10px;
+        margin: 20px
+      }
+
+      .addhotline,
+      .hotline {
+        background-color: rgb(221, 221, 221);
+
+        margin: 20px;
+        height: 600px;
+        width: 700px;
+        border-radius: 20px;
+        overflow-x: auto;
+  max-width: 100%;
+  margin-top: 100px ;
+      }
+
+      .success-box {
+        position: fixed;
+        top: 10px;
+        width: 250px;
+        height: 60px;
+        border-radius: 20px;
+        right: 0;
+        background-color: rgb(11, 0, 163);
+        opacity: 50%;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 20px;
+        padding: 10px;
+      }
+    </style>
+    <script src="./js/app.js"></script>
+
+    <Script src="./js/load.js"></Script>
+    <script src="./js/bar.js"></script>
+</body>
+
+</html>
